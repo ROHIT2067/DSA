@@ -23,17 +23,33 @@
 
 //Sum of Array
 // function sum(arr,i=0){
-//     if(i===arr.length)return 0
+//     if(i==arr.length)return 0
 //     return arr[i]+sum(arr,i+1)
 // }
 // console.log(sum([10,8]))
 
-//Prime 
- function prime(n){
-    if(n<2)return false
-    for(let i=2;i<=Math.sqrt(n);i++){
-        if(n%i===0)return false
-    }
-    return true
+//Reverse a string
+// function rever(str){
+//     if(str.length<=1)return str
+//     return rever(str.slice(1))+str[0]
+// }
+// console.log(rever("thambi"))
+
+//recursiveBinary
+//flatten
+//Fibonacci 
+function fib(n){
+    if(n==0) return 0;
+    if(n==1) return 1;
+
+     return fib(n-1)+fib(n-2)
 }
-console.log(prime(2))
+
+function printFibonacci(n){
+let result=[];
+for(let i=0;i<n;i++){
+    result.push(fib(i));
+}
+console.log(result)
+}
+printFibonacci(3)
