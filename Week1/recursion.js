@@ -35,21 +35,50 @@
 // }
 // console.log(rever("thambi"))
 
-//recursiveBinary
-//flatten
 //Fibonacci 
-function fib(n){
-    if(n==0) return 0;
-    if(n==1) return 1;
+// function fib(n){
+//     if(n<=1)return n
+//     return fib(n-1)+fib(n-2)
+// }
+// function print(n){
+//     let rslt=[]
+//     for(let i=0;i<n;i++){
+//         rslt.push(fib(i))
+//     }
+//     return rslt
+// }
+// console.log(print(5))
 
-     return fib(n-1)+fib(n-2)
-}
+//recursiveBinary
+// function recursiveBinary(arr,tar,left=0,right=arr.length){
+//     if(left>right)return -1
 
-function printFibonacci(n){
-let result=[];
-for(let i=0;i<n;i++){
-    result.push(fib(i));
-}
-console.log(result)
-}
-printFibonacci(3)
+//     let middle=Math.floor((left+right)/2)
+
+//     if(tar===arr[middle])return middle
+
+//     if(tar<arr[middle]){
+//         return recursiveBinary(arr,tar,left,middle-1)
+//     }else{
+//         return recursiveBinary(arr,tar,middle+1,right)
+//     }
+// }
+// console.log(recursiveBinary([0,1,2,3,4,5,6],1))
+
+//flatten
+// function flatten(arr){
+//     let rslt=[]
+//     for(let n of arr){
+//         if(Array.isArray(n)){
+//             let multiarray=flatten(n)
+//             for(let value of multiarray){
+//                 rslt.push(value)
+//             }
+//         }else{
+//             rslt.push(n)
+//         }
+//     }
+//     return rslt
+// }
+// console.log(flatten([[1, [2, 3], [4, [5, 6]], 7]]))
+
