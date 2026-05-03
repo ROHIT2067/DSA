@@ -81,3 +81,12 @@
 //     return rslt
 // }
 // console.log(flatten([[1, [2, 3], [4, [5, 6]], 7]]))
+
+//palindrome
+// function ispalindrome(str){
+//     if(str.length<=1)return true
+
+//     if(str[0]!==str[str.length-1])return false
+
+//     return ispalindrome(str.slice(1,-1))
+// }
