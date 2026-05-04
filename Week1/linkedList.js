@@ -114,8 +114,57 @@ class LinkedList {
         }
         return console.log("Invalid Input")
     }
-  
 
+    //Reverse 
+    reverse(){
+        let current=this.head
+        let prev=null
+        while(current){
+            let temp=current.next
+            current.next=prev
+            prev=current
+            current=temp
+
+        }
+        this.head=prev
+    }
+  
+    //isDuplicate 
+    isDuplicate(data){
+        if(this.head.data===data)return console.log(`${data} already exists`)
+            let current=this.head
+        for(let i=0;i<=this.size-1;i++){
+            if(current.data===data)return console.log(`${data} already exists`)
+                current=current.next
+        }
+    return console.log("KETT MWTHEE")
+    }
+
+    //findMiddle
+
+    middle(){
+        let fast=this.head
+        let slow=this.head
+
+        while(fast && fast.next){
+            fast=fast.next.next
+            slow=slow.next
+        }
+        console.log(slow.data)
+    }
+
+    //delete Middle
+    deleteMiddle(){
+        let fast=this.head
+        let slow=this.head
+        let prev
+        while(fast && fast.next){
+            fast=fast.next.next
+            prev=slow
+            slow=slow.next
+        }
+        prev.next=slow.next
+    }
 
   //Print Data
   printData() {
@@ -136,11 +185,17 @@ list.insertFirst(2);
 list.insertFirst(1);
 list.insertEnd(4);
 list.insertEnd(5);
-list.insertEnd(18);
+// list.insertEnd(18);
 // console.log(list.getSize())
 // list.insertFirst(1)
 // list.printData();
 // list.delete(7)
 // list.deleteByValue(18)
-list.search(18)
+// list.search(18)
+// list.reverse()
+list.deleteMiddle()
 list.printData();
+
+
+
+//ASHIN WHATSAPP TOPICS
