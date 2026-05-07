@@ -208,5 +208,5 @@ list.insertEnd(5);
 // list.search(18)
 // list.reverse()
 // list.deleteMiddle();
-list.dupl()
-// list.printData();
+// list.dupl()
+list.printData();

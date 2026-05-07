@@ -143,7 +143,7 @@
 //Reverse an array without new array
 // let arr=[1,2,3,4,5]
 // let temp=0
-// for(let i=0;i<arr.length;i++){
+// for(let i=0;i<arr.length/2;i++){
 //     temp=arr[i]
 //     arr[i]=arr[arr.length-1-i]
 //     arr[arr.length-1-i]=temp
@@ -191,3 +191,20 @@
 //     }
 // }
 // console.log(rslt)
+
+//Move zeros to the front
+// function zeroFront(arr){
+//     let pos=arr.length-1
+//     for(let i=arr.length-1;i>=0;i--){
+//         if(arr[i]!==0){
+//             arr[pos]=arr[i]
+//             pos--
+//         }
+//     }
+
+//     for(let i=0;i<=pos;i++){
+//         arr[i]=0
+//     }
+//     return arr
+// }
+// console.log(zeroFront([1,2,3,4,0,0,0,0]))

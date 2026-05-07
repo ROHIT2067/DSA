@@ -41,7 +41,7 @@ class dlinkedList {
   //insert at any index
   insert(data, index) {
     index--;
-    if (index < 0 || index >= this.size) return console.log("Invalid Index");
+    if (index < 0 || index > this.size) return console.log("Invalid Index");
 
     if (index === 0) {
       let newNode = new Node(data, this.head);
@@ -56,7 +56,9 @@ class dlinkedList {
         current = current.next;
       }
       newNode.next = current.next;
-      current.next.prev = newNode;
+      if (current.next) {
+        current.next.prev = newNode;
+      }
       newNode.prev = current;
       current.next = newNode;
     }
@@ -200,5 +202,5 @@ dlist.insertEnd(5);
 dlist.insertEnd(6);
 // dlist.insertEnd(7);
 // dlist.deleteMiddle()
-dlist.reverse()
+dlist.reverse();
 dlist.print();

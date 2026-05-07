@@ -90,3 +90,15 @@
 
 //     return ispalindrome(str.slice(1,-1))
 // }
+
+//sum of array
+// function sum(arr,i=0){
+//     if(i===arr.length)return 0
+//     if(typeof(arr[i])=="number"){
+//         return arr[i]+sum(arr,i+1)
+//     }else{
+//         return sum(arr,i+1)
+//     }
+// }
+// let arr=[1,2,"a",3,"m","m",18,"u"]
+// console.log(sum(arr))
