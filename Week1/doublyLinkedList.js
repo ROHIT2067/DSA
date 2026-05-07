@@ -74,6 +74,9 @@ class dlinkedList {
     if (index === 0) {
       removedNode = this.head;
       this.head = removedNode.next;
+      if (this.head) {
+        this.head.prev = null;
+      }
     } else {
       let current = this.head;
       for (let i = 0; i < index - 1; i++) {
