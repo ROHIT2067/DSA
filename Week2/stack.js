@@ -13,7 +13,7 @@ class Stack {
   }
 
   isEmpty() {
-    return this.size === 0;
+    return this.size() === 0;
   }
 
   pop() {
@@ -33,6 +33,13 @@ class Stack {
       console.log(this.stack[i]);
     }
   }
+
+  reverseStack(){
+    let newStack=[]
+    while(this.stack.length)newStack.push(this.stack.pop())
+      this.stack=newStack
+      // return newStack
+  }
 }
 
 const stack = new Stack();
@@ -41,7 +48,7 @@ stack.push(4);
 stack.push(3);
 stack.push(2);
 stack.push(1);
-// stack.peek()
+// stack.reverseStack()
 // stack.printStack()
 
 //Reverse String using stack
@@ -98,3 +105,119 @@ function isPalindrome(str) {
   return s === Reverse;
 }
 // console.log(isPalindrome("tahmbi"))
+
+//Stack using linked list
+class Node {
+  constructor(data, next = null) {
+    this.data = data;
+    this.next = next;
+  }
+}
+
+class LinkedStack {
+  constructor() {
+    this.tHead = null;
+  }
+
+  push(data) {
+    this.tHead = new Node(data, this.tHead);
+  }
+
+  pop() {
+    if (this.tHead == null) return "Stack UnderFlow";
+    const tHead=this.tHead
+    this.tHead = this.tHead.next;
+    return tHead.data;
+  }
+
+  peek() {
+    if (this.tHead == null) return "Stack UnderFlow";
+    return this.tHead.data;
+  }
+
+  print() {
+    if (this.tHead == null) return "Stack Underflow";
+    let current = this.tHead;
+    while (current !== null) {
+      console.log(current.data);
+      current = current.next;
+    }
+  }
+}
+
+const linkedStackk= new LinkedStack()
+linkedStackk.push(5)
+linkedStackk.push(4)
+linkedStackk.push(3)
+linkedStackk.push(2)
+linkedStackk.push(1)
+
+//MinStack
+class MinStack {
+  constructor() {
+    this.stack = [];
+    this.minStack = []; // tracks minimums
+  }
+
+  push(val) {
+    this.stack.push(val);
+    const min = this.minStack.length === 0 ? val : Math.min(val, this.getMin());
+    this.minStack.push(min);
+  }
+
+  pop() {
+    if (this.stack.length === 0) return "Stack Underflow";
+    this.minStack.pop();
+    return this.stack.pop();
+  }
+
+  peek() {
+    if (this.stack.length === 0) return "Stack Underflow";
+    return this.stack[this.stack.length - 1];
+  }
+
+  getMin() {
+    if (this.minStack.length === 0) return "Stack Underflow";
+    return this.minStack[this.minStack.length - 1];
+  }
+
+  printMin(){
+    for(let i=0;i<this.minStack.length;i++){
+      console.log(this.minStack[i])
+    }
+  }
+}
+const min=new MinStack()
+
+//Undo-redo using Stack
+class undoRedo{
+  constructor(){
+    this.undoStack=[]
+    this.redoStack=[]
+  }
+  
+  execute(action){
+    this.undoStack.push(action)
+    this.redoStack=[] //Clear redo history on new action
+    console.log(`Executed : ${action}`)
+  }
+
+  undo(){
+    if(this.undoStack.length===0)return "Nothing to undo"
+    const action=this.undoStack.pop()
+    this.redoStack.push(action)
+    console.log(`Undone : ${action}`)
+  }
+
+  redo(){
+    if(this.redoStack.length===0)return "Nothing to redo"
+    const action=this.redoStack.pop()
+    this.undoStack.push(action)
+    console.log(`Redone : ${action}`)
+  }
+  
+  getState(){
+    console.log("Undo Stack = ",this.undoStack)
+    console.log("Redo Stack = ",this.redoStack)
+  }
+}
