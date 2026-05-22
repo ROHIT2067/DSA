@@ -34,11 +34,11 @@ class Stack {
     }
   }
 
-  reverseStack(){
-    let newStack=[]
-    while(this.stack.length)newStack.push(this.stack.pop())
-      this.stack=newStack
-      // return newStack
+  reverseStack() {
+    let newStack = [];
+    while (this.stack.length) newStack.push(this.stack.pop());
+    this.stack = newStack;
+    // return newStack
   }
 }
 
@@ -125,7 +125,7 @@ class LinkedStack {
 
   pop() {
     if (this.tHead == null) return "Stack UnderFlow";
-    const tHead=this.tHead
+    const tHead = this.tHead;
     this.tHead = this.tHead.next;
     return tHead.data;
   }
@@ -145,12 +145,12 @@ class LinkedStack {
   }
 }
 
-const linkedStackk= new LinkedStack()
-linkedStackk.push(5)
-linkedStackk.push(4)
-linkedStackk.push(3)
-linkedStackk.push(2)
-linkedStackk.push(1)
+const linkedStackk = new LinkedStack();
+linkedStackk.push(5);
+linkedStackk.push(4);
+linkedStackk.push(3);
+linkedStackk.push(2);
+linkedStackk.push(1);
 
 //MinStack
 class MinStack {
@@ -181,43 +181,86 @@ class MinStack {
     return this.minStack[this.minStack.length - 1];
   }
 
-  printMin(){
-    for(let i=0;i<this.minStack.length;i++){
-      console.log(this.minStack[i])
+  printMin() {
+    for (let i = 0; i < this.minStack.length; i++) {
+      console.log(this.minStack[i]);
     }
   }
 }
-const min=new MinStack()
+const min = new MinStack();
 
 //Undo-redo using Stack
-class undoRedo{
-  constructor(){
-    this.undoStack=[]
-    this.redoStack=[]
-  }
-  
-  execute(action){
-    this.undoStack.push(action)
-    this.redoStack=[] //Clear redo history on new action
-    console.log(`Executed : ${action}`)
+class undoRedo {
+  constructor() {
+    this.undoStack = [];
+    this.redoStack = [];
   }
 
-  undo(){
-    if(this.undoStack.length===0)return "Nothing to undo"
-    const action=this.undoStack.pop()
-    this.redoStack.push(action)
-    console.log(`Undone : ${action}`)
+  execute(action) {
+    this.undoStack.push(action);
+    this.redoStack = []; //Clear redo history on new action
+    console.log(`Executed : ${action}`);
   }
 
-  redo(){
-    if(this.redoStack.length===0)return "Nothing to redo"
-    const action=this.redoStack.pop()
-    this.undoStack.push(action)
-    console.log(`Redone : ${action}`)
+  undo() {
+    if (this.undoStack.length === 0) return "Nothing to undo";
+    const action = this.undoStack.pop();
+    this.redoStack.push(action);
+    console.log(`Undone : ${action}`);
   }
-  
-  getState(){
-    console.log("Undo Stack = ",this.undoStack)
-    console.log("Redo Stack = ",this.redoStack)
+
+  redo() {
+    if (this.redoStack.length === 0) return "Nothing to redo";
+    const action = this.redoStack.pop();
+    this.undoStack.push(action);
+    console.log(`Redone : ${action}`);
+  }
+
+  getState() {
+    console.log("Undo Stack = ", this.undoStack);
+    console.log("Redo Stack = ", this.redoStack);
+  }
+}
+
+//Stack using queue
+class stackUsingQueue {
+  constructor() {
+    this.queue1 = [];
+    this.queue2 = [];
+  }
+
+  push(data) {
+    this.queue2.push(data);
+    while (this.queue1.length) {
+      this.queue2.push(this.queue1.shift());
+    }
+    let temp = this.queue1;
+    this.queue1 = this.queue2;
+    this.queue2 = temp;
+  }
+
+  pop() {
+    if (this.isEmpty()) return "Stack Underflow";
+    return this.queue1.shift();
+  }
+
+  peek() {
+    if (this.isEmpty()) return "Stack Underflow";
+    return this.queue1[0];
+  }
+
+  isEmpty() {
+    return this.queue1.length === 0;
+  }
+
+  size() {
+    return this.queue1.length;
+  }
+
+  printStack() {
+    if (this.isEmpty()) return console.log("Stack is empty");
+    for (let i = 0; i < this.queue1.length; i++) {
+      console.log(this.queue1[i]);
+    }
   }
 }
