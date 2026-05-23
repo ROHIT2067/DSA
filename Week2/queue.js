@@ -77,7 +77,7 @@ class queue {
 var circularQueue = function (size) {
   this.queue = [];
   this.size = size;
-
+};
   circularQueue.prototype.enQueue = function (data) {
     if (this.size === this.queue.length) return "Queue Overflow";
     this.queue.push(data);
@@ -105,12 +105,11 @@ var circularQueue = function (size) {
   circularQueue.prototype.isFull = function () {
     return this.size === this.queue.length;
   };
-};
 
 //Queue using stacks
 function queue() {
-  this.stack1 = [];
-  this.stack2 = [];
+  this.stack1 = [];  //intake stack. Every new element lands here.
+  this.stack2 = []; //output stack. Elements are served from here in queue order.
 }
 
 queue.prototype.enqueue = function (data) {
