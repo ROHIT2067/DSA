@@ -70,6 +70,11 @@ class maxHeap {
       }
     }
   }
+
+  kthLargest(k){
+        if(k<1 || k>this.heap.length)return "Invalid Input"
+        return [...this.heap].sort((a,b)=>b-a)[k-1]
+    }
 }
 
 // const heap = new Heap();
@@ -155,13 +160,19 @@ class minHeap {
       }
     }
   }
+
+  kthSmallest(k){
+        if(k<1 || k>this.heap.length)return "Invalid Input"
+        return [...this.heap].sort((a,b)=>a-b)[k-1]
+    }
 }
-// const MinHeap=new minHeap()
-// MinHeap.push(10)
-// MinHeap.push(8)
-// MinHeap.push(11)
-// MinHeap.push(18)
-// console.log(MinHeap.heap.join(','))
+const MinHeap=new minHeap()
+MinHeap.push(10)
+MinHeap.push(8)
+MinHeap.push(11)
+MinHeap.push(18)
+console.log(MinHeap.heap.join(','))
+console.log(MinHeap.kthSmallest(5))
 // console.log(MinHeap.pull())
 // console.log(MinHeap.pull())
 // console.log(MinHeap.pull())
