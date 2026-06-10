@@ -75,6 +75,16 @@ class maxHeap {
         if(k<1 || k>this.heap.length)return "Invalid Input"
         return [...this.heap].sort((a,b)=>b-a)[k-1]
     }
+
+    sort(){
+      const clone=new maxHeap()
+      clone.heap=[...this.heap]
+      const rslt=[]
+      while(clone.heap.length){
+        data.push(clone.pull())
+      }
+      return rslt
+    }
 }
 
 // const heap = new Heap();
@@ -165,6 +175,16 @@ class minHeap {
         if(k<1 || k>this.heap.length)return "Invalid Input"
         return [...this.heap].sort((a,b)=>a-b)[k-1]
     }
+
+    sort(){
+      const clone=new minHeap()
+      clone.heap=[...this.heap]
+      const rslt=[]
+      while(clone.heap.length){
+        rslt.push(clone.pull())
+      }
+      return rslt
+    }
 }
 const MinHeap=new minHeap()
 MinHeap.push(10)
@@ -172,7 +192,8 @@ MinHeap.push(8)
 MinHeap.push(11)
 MinHeap.push(18)
 console.log(MinHeap.heap.join(','))
-console.log(MinHeap.kthSmallest(5))
+// console.log(MinHeap.kthSmallest(5))
+console.log(MinHeap.sort())
 // console.log(MinHeap.pull())
 // console.log(MinHeap.pull())
 // console.log(MinHeap.pull())
