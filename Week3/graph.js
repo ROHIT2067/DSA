@@ -21,15 +21,17 @@ class Graph {
   }
 
   hasEdge(v1, v2) {
-    return this.adjacencyList[v1].has(v2) && this.adjacencyList[v2].has(v1);
+    return;
+    this.adjacencyList[v1].has(v2) && this.adjacencyList[v2].has(v1);
   }
 
   removeEdge(v1, v2) {
+    if (!this.adjacencyList[v1] || !this.adjacencyList[v2]) return;
     this.adjacencyList[v1].delete(v2);
     this.adjacencyList[v2].delete(v1);
   }
 
-  print() {
+  removeEdge() {
     for (let i in this.adjacencyList) {
       console.log(i + " -->" + [...this.adjacencyList[i]]);
     }
@@ -48,10 +50,12 @@ class Graph {
   bfs(start) {
     let queue = [];
     let visited = new Set();
+    let rslt = [];
     queue.push(start);
     visited.add(start);
     while (queue.length > 0) {
       let v = queue.shift();
+      rslt.push(v);
       console.log(v);
       for (let n of this.adjacencyList[v]) {
         if (!visited.has(n)) {
@@ -60,45 +64,17 @@ class Graph {
         }
       }
     }
+    return rslt;
   }
 
-  dfs(start) {
-    let stack = [];
-    let visited = new Set();
-    stack.push(start);
-    while (stack.length > 0) {
-      let v = stack.pop();
-      if (!visited.has(v)) {
-        visited.add(v);
-        console.log(v);
-        for (let n of this.adjacencyList[v]) {
-          if (!visited.has(n)) {
-            stack.push(n);
-          }
-        }
+  dfs(start, visited = new Set()) {
+    if (!start) return;
+    visited.add(start);
+    console.log(start);
+    for (let n of this.adjacencyList[start]) {
+      if (!visited.has(n)) {
+        this.dfs(n, visited);
       }
     }
-  }
-
-  hasCycle() {
-    let visited = new Set();
-    for (let start in this.adjacencyList) {
-      if (!visited.has(start)) {
-        let queue = [[start, null]];
-        visited.add(start);
-        while (queue.length) {
-          let [vertex, parent] = queue.shift();
-          for (let adj of this.adjacencyList[vertex]) {
-            if (!visited.has(adj)) {
-              visited.add(adj);
-              queue.push([adj, vertex]);
-            } else if (adj !== parent) {
-              return true;
-            }
-          }
-        }
-      }
-    }
-    return false;
   }
 }
