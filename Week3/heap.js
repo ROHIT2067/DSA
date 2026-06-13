@@ -81,7 +81,7 @@ class maxHeap {
       clone.heap=[...this.heap]
       const rslt=[]
       while(clone.heap.length){
-        data.push(clone.pull())
+        rslt.push(clone.pull())
       }
       return rslt
     }

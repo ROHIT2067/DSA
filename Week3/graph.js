@@ -21,8 +21,7 @@ class Graph {
   }
 
   hasEdge(v1, v2) {
-    return;
-    this.adjacencyList[v1].has(v2) && this.adjacencyList[v2].has(v1);
+    return this.adjacencyList[v1].has(v2) && this.adjacencyList[v2].has(v1);
   }
 
   removeEdge(v1, v2) {
@@ -31,7 +30,7 @@ class Graph {
     this.adjacencyList[v2].delete(v1);
   }
 
-  removeEdge() {
+  print() {
     for (let i in this.adjacencyList) {
       console.log(i + " -->" + [...this.adjacencyList[i]]);
     }
