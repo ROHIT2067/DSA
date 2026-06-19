@@ -6,12 +6,12 @@ class Node {
   }
 }
 
-class binarySearchTree {
+class bst {
   constructor() {
     this.root = null;
   }
 
-  isEmpty() {
+  ifEmpty() {
     return this.root === null;
   }
 
@@ -19,88 +19,127 @@ class binarySearchTree {
     let newNode = new Node(data);
     if (this.root === null) {
       this.root = newNode;
-      return;
+    } else {
+      this.insertNode(this.root, newNode);
     }
-
-    this.insertNode(this.root, newNode);
   }
 
-  insertNode(root, newNode) {
-    if (newNode.data < root.data) {
-      if (root.left === null) {
-        root.left = newNode;
+  insertNode(curr, newNode) {
+    if (newNode.data === curr.data) return;
+    if (curr.data < newNode.data) {
+      if (curr.right === null) {
+        curr.right = newNode;
       } else {
-        this.insertNode(root.left, newNode);
+        this.insertNode(curr.right, newNode);
       }
     } else {
-      if (root.right === null) {
-        root.right = newNode;
+      if (curr.left === null) {
+        curr.left = newNode;
       } else {
-        this.insertNode(root.right, newNode);
+        this.insertNode(curr.left, newNode);
       }
     }
   }
 
   search(root, data) {
-    if (!root) return false;
+    if (root == null) return false;
+    if (root.data == data) return true;
 
-    if (root.data === data) {
-      return true;
-    } else if (data < root.data) {
-      return this.search(root.left, data);
-    } else {
+    if (root.data < data) {
       return this.search(root.right, data);
-    }
-  }
-
-  height(root) {
-    if (!root) {
-      return -1;
     } else {
-      return 1 + Math.max(this.height(root.left), this.height(root.right));
+      return this.search(root.left, data);
     }
   }
 
   preOrder(root) {
-    if (root) {
-      console.log(root.data);
-      this.preOrder(root.left);
-      this.preOrder(root.right);
-    }
-  }
-
-  inOrder(root) {
-    if (root) {
-      this.inOrder(root.left);
-      console.log(root.data);
-      this.inOrder(root.right);
-    }
+    if (!root) return;
+    console.log(root.data);
+    this.preOrder(root.left);
+    this.preOrder(root.right);
   }
 
   postOrder(root) {
-    if (root) {
-      this.postOrder(root.left);
-      this.postOrder(root.right);
-      console.log(root.data);
+    if (!root) return;
+    this.postOrder(root.left);
+    this.postOrder(root.right);
+    console.log(root.data);
+  }
+
+  inOrder(root) {
+    if (!root) return;
+    this.inOrder(root.left);
+    console.log(root.data);
+    this.inOrder(root.right);
+  }
+
+  bfs() {
+    let queue = [];
+    queue.push(this.root);
+    while (queue.length) {
+      let curr = queue.shift();
+      console.log(curr.data);
+      if (curr.left) {
+        queue.push(curr.left);
+      }
+      if (curr.right) {
+        queue.push(curr.right);
+      }
     }
   }
 
   min(root) {
-    if (!root) return null;
-    if (!root.left) return root.data;
+    if (root.left === null) return root.data;
     return this.min(root.left);
   }
 
   max(root) {
-    if (!root) return null;
-    if (!root.right) return root.data;
+    if (root.right === null) return root.data;
     return this.max(root.right);
+  }
+
+  delete(data){
+    this.root=this.deleteNode(this.root,data)
+  }
+
+  deleteNode(root,data){
+    if(root==null)return root
+
+    if(data<root.data){
+      root.left=this.deleteNode(root.left,data)
+    }else if(data>root.data){
+      root.right=this.deleteNode(root.right,data)
+    }else{
+      if(!root.left && !root.right)return null
+      if(!root.left){
+        return root.right
+      }else if(!root.right){
+        return root.left
+      }
+      root.data=this.min(root.right)
+      root.right=this.deleteNode(root.right,root.data)
+    }
+    return root
   }
 }
 
-const t = new binarySearchTree();
-t.insert(10);
-t.insert(5);
-t.insert(18);
-console.log(t.search(t.root, 18));
-console.log(t.max(t.root));
+const b = new bst();
+b.insert(10);
+b.insert(5);
+b.insert(15);
+b.insert(3);
+// b.insert(7);
+// b.insert(18)
+// b.insert(8)
+// console.log(b.search(b.root,18))
+// console.log(b.search(b.root,8))
+// console.log(b.search(b.root,1))
+// b.preOrder(b.root) //10,5,3,7,15
+// console.log("-------")
+// b.inOrder(b.root) //3,5,7,10,15
+// b.postOrder(b.root) //3,7,5,15,10
+b.bfs()
+console.log("-------")
+b.delete(10)
+b.bfs()
+// console.log(b.max(b.root));

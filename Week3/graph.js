@@ -55,7 +55,7 @@ class Graph {
     while (queue.length > 0) {
       let v = queue.shift();
       rslt.push(v);
-      console.log(v);
+      // console.log(v);
       for (let n of this.adjacencyList[v]) {
         if (!visited.has(n)) {
           visited.add(n);
@@ -76,4 +76,30 @@ class Graph {
       }
     }
   }
+
+  hasCycle() {
+    let visited=new Set()
+
+    for(let start in this.adjacencyList){
+      if(!visited.has(start)){
+        let queue=[[start,null]]
+        visited.add(start)
+        while(queue.length>0){
+          let [vertex,parent]=queue.shift()
+          for(let adj of this.adjacencyList[vertex]){
+            if(!visited.has(adj)){
+              queue.push([adj,vertex])
+              visited.add(adj)
+            }else if(adj!==parent){
+              return true
+            }
+          }
+        }
+      }
+    }
+    return false
+  }
+  
+
+  cloneGraph() {}
 }
