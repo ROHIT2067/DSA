@@ -150,7 +150,7 @@ class bst {
     return rslt
   }
 
-  kThLargest(root,k){
+  kThLargest(k){
     let count=0
     let rslt=null
 
