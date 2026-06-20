@@ -121,6 +121,53 @@ class bst {
     }
     return root
   }
+
+  height(root){
+    if(!root)return -1
+    return 1+ Math.max(this.height(root.left),this.height(root.right))
+  }
+
+  isValidBst(root,min=-Infinity,max=Infinity){
+    if(!root)return true
+    if(root.data<=min || root.data>=max)return false
+    return this.isValidBst(root.left,min,root.data) && this.isValidBst(root.right,root.data,max) 
+  }
+
+  kThSmalles(k){
+    let count=0
+    let rslt=null
+    function inOrder(node){
+      if(!node || rslt!==null)return
+      inOrder(node.left)
+      count++
+      if(count===k){
+        rslt=node.data
+        return
+      }
+      inOrder(node.right)
+    }
+    inOrder(this.root)
+    return rslt
+  }
+
+  kThLargest(root,k){
+    let count=0
+    let rslt=null
+
+    function reverseInOrder(node){
+      if(!node || rslt!==null)return
+      reverseInOrder(node.right)
+      count++
+      if(count===k){
+        rslt=node.data
+        return
+      }
+      reverseInOrder(node.left)
+    }
+    reverseInOrder(this.root)
+    return rslt
+
+  }
 }
 
 const b = new bst();
